@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "76275024-f152-4470-a773-d4d6b52772bf",
+		"name": "week2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "取得所有貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://two024node.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"two024node",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增貼文",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"貼文姓名\",\r\n    \"tags\": [\"貼文標籤\"],\r\n    \"type\": \"貼文類型\",\r\n    \"content\": \"貼文內容\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://two024node.onrender.com/post",
+					"protocol": "https",
+					"host": [
+						"two024node",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除全部貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://two024node.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"two024node",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得單一貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://two024node.onrender.com/post/:id",
+					"protocol": "https",
+					"host": [
+						"two024node",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"post",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改單一貼文",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"_id\": \"6623ab09785832b8317ef069\",\r\n        \"name\": \"貼文姓名3\",\r\n        \"tags\": [\r\n            \"貼文標籤\"\r\n        ],\r\n        \"type\": \"貼文類型\",\r\n        \"image\": \"\",\r\n        \"content\": \"貼文內容\",\r\n        \"likes\": 0,\r\n        \"comments\": 0\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://two024node.onrender.com/post/:id",
+					"protocol": "https",
+					"host": [
+						"two024node",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"post",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單一貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://two024node.onrender.com/post/:id",
+					"protocol": "https",
+					"host": [
+						"two024node",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"post",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
