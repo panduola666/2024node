@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "e6487dd2-e325-4c40-a936-059bc35297b9",
+		"name": "week3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "查詢全部貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://week3-y696.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得單一貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://week3-y696.onrender.com/posts/:id",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增貼文",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"貼文姓名\",\r\n    \"tags\": [\"貼文標籤必填\"],\r\n    \"type\": \"貼文類型\",\r\n    \"content\": \"貼文內容\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://week3-y696.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改單一貼文",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"_id\": \"6623ab09785832b8317ef069\",\r\n        \"name\": \"貼文姓名3\",\r\n        \"tags\": [\r\n            \"貼文標籤\"\r\n        ],\r\n        \"type\": \"貼文類型\",\r\n        \"image\": \"\",\r\n        \"content\": \"貼文內容\",\r\n        \"likes\": 0,\r\n        \"comments\": 0\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://week3-y696.onrender.com/posts/:id",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除全部貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://week3-y696.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單一貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://week3-y696.onrender.com/posts/:id",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
