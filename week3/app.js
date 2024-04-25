@@ -5,9 +5,10 @@ var logger = require('morgan');
 var cors = require('cors')
 
 var postsRouter = require('./routes/posts');
+var usersRouter = require('./routes/users');
 
 var app = express();
-require('./connections')
+require('./handle/connections')
 
 app.use(cors())
 app.use(logger('dev'));
@@ -17,5 +18,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/posts', postsRouter);
+app.use('/users', usersRouter);
 
 module.exports = app;

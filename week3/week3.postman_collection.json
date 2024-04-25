@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://week3-y696.onrender.com/posts",
+					"raw": "https://week3-y696.onrender.com/posts?q=內容&order=desc",
 					"protocol": "https",
 					"host": [
 						"week3-y696",
@@ -20,6 +20,16 @@
 					],
 					"path": [
 						"posts"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "內容"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
 					]
 				}
 			},
@@ -45,7 +55,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -59,7 +69,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"貼文姓名\",\r\n    \"tags\": [\"貼文標籤必填\"],\r\n    \"type\": \"貼文類型\",\r\n    \"content\": \"貼文內容\"\r\n}",
+					"raw": "{\r\n    \"tags\": [\"#標籤\"],\r\n    \"type\": \"public\",\r\n    \"content\": \"貼文內容\",\r\n    \"image\": \"\",\r\n    \"userId\": \"662a94c3c94e2afe73eaea0d\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +98,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"_id\": \"6623ab09785832b8317ef069\",\r\n        \"name\": \"貼文姓名3\",\r\n        \"tags\": [\r\n            \"貼文標籤\"\r\n        ],\r\n        \"type\": \"貼文類型\",\r\n        \"image\": \"\",\r\n        \"content\": \"貼文內容\",\r\n        \"likes\": 0,\r\n        \"comments\": 0\r\n    }",
+					"raw": "{\r\n    \"tags\": [\"#標籤\"],\r\n    \"type\": \"public\",\r\n    \"content\": \"貼文內容\",\r\n    \"image\": \"\",\r\n    \"userId\": \"662a94c3c94e2afe73eaea0d\",\r\n    \"likes\": 3,\r\n    \"comments\": 2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,7 +142,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://week3-y696.onrender.com/posts",
+					"raw": "https://week3-y696.onrender.com/posts/all",
 					"protocol": "https",
 					"host": [
 						"week3-y696",
@@ -140,7 +150,8 @@
 						"com"
 					],
 					"path": [
-						"posts"
+						"posts",
+						"all"
 					]
 				}
 			},
@@ -161,7 +172,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://week3-y696.onrender.com/posts/:id",
+					"raw": "https://week3-y696.onrender.com/posts/6628d2b6ab71b0e15f203f73",
 					"protocol": "https",
 					"host": [
 						"week3-y696",
@@ -170,13 +181,57 @@
 					],
 					"path": [
 						"posts",
-						":id"
+						"6628d2b6ab71b0e15f203f73"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "簡易查詢全部用戶",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://week3-y696.onrender.com/users",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
 					],
-					"variable": [
-						{
-							"key": "id",
-							"value": null
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "簡易註冊用戶",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nickName\": \"圈圈\",\r\n    \"email\": \"oo@gmail.com\",\r\n    \"password\": \"11111111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
+					}
+				},
+				"url": {
+					"raw": "https://week3-y696.onrender.com/users/register",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"users",
+						"register"
 					]
 				}
 			},

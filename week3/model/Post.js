@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const schema = {
-  name: {
-    type: String,
-    required: [true, '貼文姓名必填']
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref:"user", // 設定要連接到哪個 collections (不用加 s), 綁定 mongoose.model() 指定的名稱
+    required: [true, '用戶 Id 未填寫'],
   },
   tags: [
     {
@@ -13,16 +14,15 @@ const schema = {
   ],
   type: {
     type: String,
-    required: [true, '貼文類型必填']
+    default: 'public',
+    enum: {
+      values: ['public', 'private'],
+      message: '貼文類型錯誤'
+    }
   },
   image: {
     type: String,
     default: ""
-  },
-  createAt: {
-    type: Date,
-    default: Date.now,
-    select: false
   },
   content: {
     type: String,
@@ -36,11 +36,17 @@ const schema = {
     type: Number,
     default: 0
   },
+  createDate: {
+    type: Number
+  },
+  updateDate: {
+    type: Number
+  },
 }
 
 const option = {
   versionKey: false,
-  // timestamps: true
+  timestamps: { createdAt: 'createDate', updatedAt: 'updateDate' }
 }
 
 const postSchema = new mongoose.Schema(schema, option);
