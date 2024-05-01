@@ -3,92 +3,68 @@ var router = express.Router();
 const Post = require('../model/Post');
 const User = require('../model/User');
 const service = require('../service');
+const catchAll = require('../service/catchAll')
 
-router.get('/', async (req, res, next) => {
-  try {
-    const { q = '', order = 'desc' } = req.query;
-    const filter = {};
-    const sort = {
-      createDate: order === 'asc' ? 1 : -1,
-    };
-    if (q) {
-      filter.content = new RegExp(q, 'g');
-    }
-    const data = await Post.find(filter).sort(sort).populate({
-      path: 'user',
-      select: 'nickName photo',
-    });
-    service.success({ res, data });
-  } catch (error) {
-    service.error({ res, error });
+router.get('/', catchAll(async (req, res, next) => {
+  const { q = '', order = 'desc' } = req.query;
+  const filter = {};
+  const sort = {
+    createDate: order === 'asc' ? 1 : -1,
+  };
+  if (q) {
+    filter.content = new RegExp(q, 'g');
   }
-});
+  const data = await Post.find(filter).sort(sort).populate({
+    path: 'user',
+    select: 'nickName photo',
+  });
+  service.success({ res, data });
+}));
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const data = await Post.findById(req.params.id);
-    service.success({ res, data });
-  } catch (error) {
-    service.error({ http: 404, res, error: '查無此貼文' });
-  }
-});
+router.get('/:id', catchAll(async (req, res, next) => {
+  const data = await Post.findById(req.params.id);
+  service.success({ res, data })
+}));
 
-router.post('/', async (req, res, next) => {
-  try {
+router.post('/', catchAll(async (req, res, next) => {
     const {
       userId,
       tags,
       type,
       image,
       content,
-      likes = 0,
-      comments = 0,
     } = req.body;
 
     if (!type) {
-      service.error({ res, error: '貼文類型必填' });
-      return;
+      return next(service.errorTask('貼文類型必填'))
     } else if (!content.trim()) {
-      service.error({ res, error: '貼文內容必填' });
-      return;
+      return next(service.errorTask('貼文內容必填'))
     } else if (tags && !Array.isArray(tags)) {
-      service.error({ res, error: '貼文標籤型別錯誤' });
-      return;
+      return next(service.errorTask('貼文標籤型別錯誤'))
     } else if (!['public', 'private'].includes(type)) {
-      service.error({ res, error: '貼文類型錯誤' });
-      return;
+      return next(service.errorTask('貼文類型錯誤'))
     } else if(image && !String(image).startsWith('http')) {
-      service.error({ res, error: '圖片網址錯誤' });
-      return;
+      return next(service.errorTask('圖片網址錯誤'))
     } else if (!userId) {
-      service.error({ res, error: '用戶id必填' });
-      return;
+      return next(service.errorTask('用戶id必填'))
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      service.error({ http: 404, res, error: '無此用戶' });
-      return;
+      return next(service.errorTask('查無此用戶', 404))
     }
 
-    const data = await Post.create({
+    await Post.create({
       content: content.trim(),
       user: userId,
       tags,
       type,
       image,
-      likes,
-      comments,
     });
     service.success({ res, data: '新增貼文成功' });
-  } catch (error) {
-    console.log(error);
-    service.error({ res, error: '新增貼文失敗' });
-  }
-});
+}));
 
-router.patch('/:id', async (req, res, next) => {
-  try {
+router.patch('/:id', catchAll(async (req, res, next) => {
     const {
       userId,
       tags,
@@ -100,29 +76,26 @@ router.patch('/:id', async (req, res, next) => {
     } = req.body;
 
     if (!type) {
-      service.error({ res, error: '貼文類型必填' });
-      return;
+      return next(service.errorTask('貼文類型必填'))
     } else if (!content.trim()) {
-      service.error({ res, error: '貼文內容必填' });
-      return;
+      return next(service.errorTask('貼文內容必填'))
     } else if (tags && !Array.isArray(tags)) {
-      service.error({ res, error: '貼文標籤型別錯誤' });
-      return;
+      return next(service.errorTask('貼文標籤型別錯誤'))
     } else if (!['public', 'private'].includes(type)) {
-      service.error({ res, error: '貼文類型錯誤' });
-      return;
+      return next(service.errorTask('貼文類型錯誤'))
     } else if(image && !String(image).startsWith('http')) {
-      service.error({ res, error: '圖片網址錯誤' });
-      return;
+      return next(service.errorTask('圖片網址錯誤'))
     } else if (!userId) {
-      service.error({ res, error: '用戶id必填' });
-      return;
+      return next(service.errorTask('用戶id必填'))
+    } else if (Number(likes) < 0) {
+      return next(service.errorTask('點讚數不可小於 0'))
+    } else if (Number(comments) < 0) {
+      return next(service.errorTask('評論數不可小於 0'))
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      service.error({ http: 404, res, error: '無此用戶' });
-      return;
+      return next(service.errorTask('查無此用戶'))
     }
 
     const data = await Post.findById(req.params.id);
@@ -137,34 +110,24 @@ router.patch('/:id', async (req, res, next) => {
       });
       service.success({ res, data: '更新貼文成功' });
     } else {
-      service.error({ http: 404, res, error: '查無此貼文' });
+      return next(service.errorTask('查無此貼文'))
     }
-  } catch (error) {
-    service.error({ res, error: '更新貼文失敗' });
   }
-});
+));
 
-router.delete('/all', async (req, res, next) => {
-  try {
+router.delete('/all', catchAll(async (req, res, next) => {
     const data = await Post.deleteMany();
     service.success({ res, data: '刪除成功' });
-  } catch (error) {
-    service.error({ res, error: '刪除失敗' });
-  }
-});
+}));
 
-router.delete('/:id', async (req, res, next) => {
-  try {
+router.delete('/:id', catchAll(async (req, res, next) => {
     const data = await Post.findById(req.params.id);
     if (data) {
       await Post.findByIdAndDelete(req.params.id);
       service.success({ res, data: '刪除成功' });
     } else {
-      service.error({ http: 404, res, error: '查無此貼文' });
+      return next(service.errorTask('查無此貼文'))
     }
-  } catch (error) {
-    service.error({ res, error: '刪除失敗' });
-  }
-});
+}));
 
 module.exports = router;
