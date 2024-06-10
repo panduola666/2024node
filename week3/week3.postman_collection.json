@@ -1,241 +1,382 @@
 {
 	"info": {
-		"_postman_id": "e6487dd2-e325-4c40-a936-059bc35297b9",
+		"_postman_id": "b8084996-9064-426b-a04f-f6218e3609f6",
 		"name": "week3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "查詢全部貼文",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://week3-y696.onrender.com/posts?q=內容&order=desc",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts"
-					],
-					"query": [
-						{
-							"key": "q",
-							"value": "內容"
+			"name": "users",
+			"item": [
+				{
+					"name": "更新個人資料",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZiODM0NGRhZDhlZTRjYWQ1NTA1NSIsImlhdCI6MTcxODAwOTkzMywiZXhwIjoxNzE4NjE0NzMzfQ.U1DKc6nNqNEQfsQDf73YNYbaO41wVx-UnmUMJKvZfQg",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "order",
-							"value": "desc"
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickName\": \"圈圈\",\r\n    \"gender\": \"male\",\r\n    \"photo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "取得單一貼文",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://week3-y696.onrender.com/posts/:id",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "新增貼文",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"tags\": [\"#標籤\"],\r\n    \"type\": \"public\",\r\n    \"content\": \"貼文內容\",\r\n    \"image\": \"\",\r\n    \"userId\": \"662a94c3c94e2afe73eaea0d\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://week3-y696.onrender.com/posts",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "修改單一貼文",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"tags\": [\"#標籤\"],\r\n    \"type\": \"public\",\r\n    \"content\": \"貼文內容\",\r\n    \"image\": \"\",\r\n    \"userId\": \"662a94c3c94e2afe73eaea0d\",\r\n    \"likes\": 3,\r\n    \"comments\": 2\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "登入",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"oo@gmail.com\",\r\n    \"password\": \"11111111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/users/sign_in",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://week3-y696.onrender.com/posts/:id",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": null
+				{
+					"name": "取得個人資料",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZiODM0NGRhZDhlZTRjYWQ1NTA1NSIsImlhdCI6MTcxODAwOTkzMywiZXhwIjoxNzE4NjE0NzMzfQ.U1DKc6nNqNEQfsQDf73YNYbaO41wVx-UnmUMJKvZfQg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickName\": \"圈圈\",\r\n    \"gender\": \"male\",\r\n    \"photo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除全部貼文",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://week3-y696.onrender.com/posts/all",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除單一貼文",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "重設密碼",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZiODM0NGRhZDhlZTRjYWQ1NTA1NSIsImlhdCI6MTcxODAwOTkzMywiZXhwIjoxNzE4NjE0NzMzfQ.U1DKc6nNqNEQfsQDf73YNYbaO41wVx-UnmUMJKvZfQg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickName\": \"圈圈\",\r\n    \"gender\": \"male\",\r\n    \"photo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/users/updatePassword",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"updatePassword"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://week3-y696.onrender.com/posts/6628d2b6ab71b0e15f203f73",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts",
-						"6628d2b6ab71b0e15f203f73"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "簡易查詢全部用戶",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://week3-y696.onrender.com/users",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "簡易註冊用戶",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nickName\": \"圈圈\",\r\n    \"email\": \"oo@gmail.com\",\r\n    \"password\": \"11111111\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "註冊用戶",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickName\": \"圈圈\",\r\n    \"email\": \"oo@gmail.com\",\r\n    \"password\": \"11111111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/users/sign_up",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "https://week3-y696.onrender.com/users/register",
-					"protocol": "https",
-					"host": [
-						"week3-y696",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users",
-						"register"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "查詢全部貼文",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://week3-y696.onrender.com/posts?q=內容&order=desc",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "內容"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得單一貼文",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://week3-y696.onrender.com/posts/6667214a6ed4cbbbc0839e35",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6667214a6ed4cbbbc0839e35"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改單一貼文",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tags\": [\"#標籤\"],\r\n    \"type\": \"public\",\r\n    \"content\": \"貼文內容\",\r\n    \"image\": \"\",\r\n    \"userId\": \"662a94c3c94e2afe73eaea0d\",\r\n    \"likes\": \"-3\",\r\n    \"comments\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/posts/66323cc32e3812ba0445b902",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"66323cc32e3812ba0445b902"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZiODM0NGRhZDhlZTRjYWQ1NTA1NSIsImlhdCI6MTcxODAzNDU4MiwiZXhwIjoxNzE4NjM5MzgyfQ.grPGKeLKr7idC-k88rLj6Lx93Mc6gROKj2Aujnb6RW8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tags\": [\"#標籤\"],\r\n    \"type\": \"public\",\r\n    \"content\": \"貼文內容-auth\",\r\n    \"image\": \"\",\r\n    \"userId\": \"662a94c3c94e2afe73eaea0d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/posts",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除全部貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/posts/all",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除單一貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week3-y696.onrender.com/posts/6628d2b6ab71b0e15f203f73",
+							"protocol": "https",
+							"host": [
+								"week3-y696",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6628d2b6ab71b0e15f203f73"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

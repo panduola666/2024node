@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cors = require('cors')
 
 const service = require('./service')
+const isAuth = require('./middleware/isAuth')
 
 var postsRouter = require('./routes/posts');
 var usersRouter = require('./routes/users');
@@ -28,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/posts', postsRouter);
+app.use('/posts',isAuth, postsRouter);
 app.use('/users', usersRouter);
 
 app.use((req, res, next) => {

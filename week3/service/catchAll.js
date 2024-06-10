@@ -1,9 +1,9 @@
-const catchAll = callback => {
+const catchAll = (callback) => {
   return function (req, res, next) {
-    callback(req, res, next).catch(err => {
-      return next(err)
-    })
-  }
-}
+    callback(req, res, next).catch((err) => {
+      return next(err);
+    });
+  };
+};
 
-module.exports = catchAll
+module.exports = catchAll;
