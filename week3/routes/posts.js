@@ -1,10 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const Post = require('../model/Post');
 const User = require('../model/User');
 const service = require('../service');
 const catchAll = require('../service/catchAll');
-const isAuth = require('../middleware/isAuth')
 
 router.get(
   '/',

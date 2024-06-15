@@ -1,16 +1,17 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors')
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors')
 
 const service = require('./service')
 const isAuth = require('./middleware/isAuth')
 
-var postsRouter = require('./routes/posts');
-var usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
+const uploadRouter = require('./routes/upload');
 
-var app = express();
+const app = express();
 
 process.on('uncaughtException', (err) => {
   console.log('uncaughtException', err);
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/posts',isAuth, postsRouter);
 app.use('/users', usersRouter);
+app.use('/upload', isAuth,uploadRouter);
 
 app.use((req, res, next) => {
   next(service.errorTask('查無此路由'))

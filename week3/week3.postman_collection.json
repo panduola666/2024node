@@ -377,6 +377,36 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "上傳圖片",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://week3-y696.onrender.com/upload",
+					"protocol": "https",
+					"host": [
+						"week3-y696",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
